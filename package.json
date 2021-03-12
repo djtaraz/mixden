@@ -1,0 +1,31 @@
+{
+    "name": "allurmusic-web",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "djtaraz",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon index"
+    },
+    "dependencies": {
+        "apollo-server": "^2.21.1",
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^8.2.0",
+        "graphql": "^15.5.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.12.0"
+    },
+    "devDependencies": {
+        "bcrypt": "^5.0.1",
+        "nodemon": "^2.0.7",
+        "prettier": "^2.2.1"
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "quotes": false,
+        "semi": false,
+        "singleQuote": false,
+        "jsxBracketSameLine": true
+    }
+}
