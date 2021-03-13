@@ -1,9 +1,9 @@
 const { gql } = require("apollo-server")
 
-//TODO: implement maybe? songs: [Song!]! to add atleast one song to playlist before creation?
+//TODO: implement maybe? songs: [Song!]! to add atleast one song to mix before creation?
 
 module.exports = gql`
-    type Playlist {
+    type Mix {
         id: ID!
         title: String!
         addedOn: String!
@@ -31,15 +31,15 @@ module.exports = gql`
         confirmPassword: String!
     }
     type Query {
-        getPlaylists: [Playlist]
-        getPlaylist(playlistId: ID!): Playlist
+        getMixes: [Mix]
+        getMix(mixId: ID!): Mix
     }
     type Mutation {
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
-        createPlaylist(title: String!): Playlist!
-        deletePlaylist(playlistId: ID!): String!
-        addSong(playlistId: String!, link: String!, title: String): Playlist!
-        removeSong(playlistId: String!, songId: String!): Playlist!
+        createMix(title: String!): Mix!
+        deleteMix(mixId: ID!): String!
+        addSong(mixId: String!, link: String!, title: String): Mix!
+        removeSong(mixId: String!, songId: String!): Mix!
     }
 `

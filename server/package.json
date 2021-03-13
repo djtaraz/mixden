@@ -1,5 +1,6 @@
 {
-    "name": "allurmusic-web",
+    "name": "mixden-web-server",
+    "private": true,
     "version": "1.0.0",
     "main": "index.js",
     "author": "djtaraz",

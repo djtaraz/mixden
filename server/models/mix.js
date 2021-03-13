@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose")
 
-const playlistSchema = new Schema({
+const mixSchema = new Schema({
     title: String,
     addedOn: String,
     username: String,
@@ -18,4 +18,4 @@ const playlistSchema = new Schema({
     ],
 })
 
-module.exports = model("Playlist", playlistSchema)
+module.exports = model("Mix", mixSchema)

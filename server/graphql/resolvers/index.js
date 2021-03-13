@@ -1,14 +1,14 @@
-const playlistsResolvers = require("./playlists")
+const mixesResolvers = require("./mixes")
 const usersResolvers = require("./users")
 const songsResolvers = require("./songs")
 
 module.exports = {
     Query: {
-        ...playlistsResolvers.Query,
+        ...mixesResolvers.Query,
     },
     Mutation: {
         ...usersResolvers.Mutation,
-        ...playlistsResolvers.Mutation,
+        ...mixesResolvers.Mutation,
         ...songsResolvers.Mutation,
     },
 }
