@@ -16,7 +16,7 @@ mongoose
         `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.tjjts.mongodb.net/allurmusicdb?retryWrites=true&`,
         { useNewUrlParser: true }
     )
-    .then((res) => {
+    .then(() => {
         console.log("mongo connected")
         return server.listen({ port: 3000 })
     })

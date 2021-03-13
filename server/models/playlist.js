@@ -1,13 +1,21 @@
 const { model, Schema } = require("mongoose")
 
 const playlistSchema = new Schema({
-    songName: String,
-    songLink: String,
+    title: String,
     addedOn: String,
+    username: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "users",
     },
+    songs: [
+        {
+            title: String,
+            link: String,
+            addedOn: String,
+            username: String,
+        },
+    ],
 })
 
 module.exports = model("Playlist", playlistSchema)
