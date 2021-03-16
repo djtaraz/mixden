@@ -46,7 +46,12 @@ const Layout = ({ children }) => {
                             width: "80%",
                             borderRadius: "0 2rem 2rem 0",
                         }}>
-                        <main>{children}</main>
+                        <main
+                            style={{
+                                height: "100%",
+                            }}>
+                            {children}
+                        </main>
                     </div>
                 </div>
             </div>

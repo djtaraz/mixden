@@ -65,30 +65,29 @@ body,
         rgba(255, 255, 255, 0.1)
     );
 }
-.ui.vertical.menu > .navLink > .item {
+.ui.vertical.menu > .item {
     height: 10%;
     display: flex;
     align-items: center;
     font-size: 1.4rem;
     color: #b4c8ff;
 }
-
-.ui.vertical.menu > .navLink > .item.active {
-    color: #323d5e;
+.ui.vertical.menu > .item.active {
+    margin-right: -2px;
     border-right: #323d5e 2px solid;
     background: linear-gradient(
         to right bottom,
         rgba(255, 255, 255, 0.6),
         rgba(255, 255, 255, 0.2)
     ) !important;
-}
-.ui.vertical.menu > .navLink > .item.logo.active {
     color: #323d5e;
+}
+.ui.vertical.menu > .item.logo.active {
     border-right: none !important;
     background: transparent !important;
+    margin-right: 0px;
 }
-.ui.vertical.menu > .navLink > .item.borderless.corner.active {
-    color: #323d5e;
+.ui.vertical.menu > .item.borderless.corner.active {
     border-right: #323d5e 2px solid;
     background: linear-gradient(
         to right bottom,
@@ -96,18 +95,18 @@ body,
         rgba(255, 255, 255, 0.2)
     ) !important;
     border-radius: 0 0 0 2rem !important;
-}
-
-.ui.vertical.menu > .navLink > .item:hover {
     color: #323d5e;
+}
+.ui.vertical.menu > .item:hover {
     background: transparent;
+    color: #323d5e;
     transition: 0, 4s;
     transition-property: color;
 }
-.ui.vertical.menu > .navLink > .item.borderless.corner:hover {
-    color: #323d5e;
+.ui.vertical.menu > .item.borderless.corner:hover {
     background: transparent;
     border-radius: 0 0 0 2rem;
+    color: #323d5e;
     transition: 0, 4s;
     transition-property: color;
 }
