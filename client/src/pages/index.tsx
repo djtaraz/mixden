@@ -3,7 +3,8 @@ import {
     Accordion,
     AccordionTitleProps,
     Grid,
-    GridColumn,
+    Icon,
+    Button,
 } from "semantic-ui-react"
 
 import Layout from "../components/layout"
@@ -12,7 +13,6 @@ import Song from "../components/song"
 
 export default function IndexPage() {
     const [activeIndex, setActiveIndex] = React.useState<string | number>(0)
-    const [visible, setVisible] = React.useState<boolean>(true)
     const handleClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
         data: AccordionTitleProps
@@ -48,6 +48,78 @@ export default function IndexPage() {
             addedOn: "21/03/2021",
             playback: "lorem impsum lorem ipsum of course",
         },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
+        {
+            id: 4,
+            title: "timber",
+            addedOn: "21/03/2021",
+            playback: "lorem impsum lorem ipsum of course",
+        },
     ]
 
     return (
@@ -55,27 +127,76 @@ export default function IndexPage() {
             <SEO title="Mixes" />
             <div
                 style={{
-                    height: "100%",
+                    height: "88.5%",
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
+                    borderRadius: "0 2rem 0 0",
                 }}>
-                <Grid centered>
-                    <Grid.Row columns={1}>
-                        <Grid.Column width={5}>
-                            <h1>Playlist Title</h1>
+                <Grid
+                    celled="internally"
+                    divided={false}
+                    style={{
+                        //border: "2px dashed orange",
+                        borderRadius: "0 2rem 0 0",
+                        maxWidth: "100%",
+                        height: "100%",
+                    }}>
+                    <Grid.Row
+                        columns={3}
+                        style={{
+                            height: "15%",
+
+                            borderRadius: "0 2rem 0 0",
+                        }}>
+                        <Grid.Column
+                            width={2}
+                            style={{
+                                height: "100%",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                            }}>
+                            <Button icon>
+                                <Icon name="angle left" />
+                            </Button>
+                        </Grid.Column>
+                        <Grid.Column textAlign="center" width={12}>
+                            <h1>Playlist title</h1>
+                        </Grid.Column>
+                        <Grid.Column
+                            width={2}
+                            style={{
+                                borderRadius: "0 2rem 0 0",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                            }}>
+                            <Button icon>
+                                <Icon name="angle right" />
+                            </Button>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row columns={3}>
-                        <Grid.Column floated="left" width={1}>
-                            previous
-                        </Grid.Column>
-                        <Grid.Column width={10}>
+                    <Grid.Row
+                        columns={1}
+                        style={{
+                            height: "85%",
+                        }}>
+                        <Grid.Column
+                            width={16}
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                position: "relative",
+                                maxHeight: "100%",
+                                overflow: "auto",
+                            }}>
                             <Accordion styled>
                                 {songs.map((song, index) => (
                                     <Song
-                                        key={song.id}
                                         name={song.title}
                                         addedOn={song.addedOn}
                                         playback={song.playback}
@@ -86,11 +207,19 @@ export default function IndexPage() {
                                 ))}
                             </Accordion>
                         </Grid.Column>
-                        <Grid.Column floated="right" width={1}>
-                            next
-                        </Grid.Column>
                     </Grid.Row>
                 </Grid>
+            </div>
+            <div
+                style={{
+                    height: "11.5%",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "0 0 2rem 0",
+                }}>
+                menu
             </div>
         </Layout>
     )

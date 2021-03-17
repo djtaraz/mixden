@@ -87,7 +87,7 @@ body,
     background: transparent !important;
     margin-right: 0px;
 }
-.ui.vertical.menu > .item.borderless.corner.active {
+.ui.vertical.menu > .item.corner.active {
     border-right: #323d5e 2px solid;
     background: linear-gradient(
         to right bottom,
@@ -103,10 +103,33 @@ body,
     transition: 0, 4s;
     transition-property: color;
 }
-.ui.vertical.menu > .item.borderless.corner:hover {
+.ui.vertical.menu > .item.corner:hover {
     background: transparent;
     border-radius: 0 0 0 2rem;
     color: #323d5e;
     transition: 0, 4s;
     transition-property: color;
+}
+
+.accordion.ui.styled {
+    min-width: 90%;
+}
+.ui.icon.button {
+    color: #323d5e !important;
+    background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.4)
+    ) !important;
+}
+.ui.icon.button:hover {
+    background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.2)
+    ) !important;
+}
+
+.ui.icon.button:active {
+    color: #b4c8ff !important;
 }

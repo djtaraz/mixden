@@ -57,7 +57,7 @@ export default function NavMenu(): React.ReactElement {
                 name="browse"
                 className="borderless"
                 style={{
-                    marginBottom: "32vh",
+                    marginBottom: "39vh",
                 }}
                 active={tab === "browse"}
                 onClick={handleClick}
@@ -69,6 +69,7 @@ export default function NavMenu(): React.ReactElement {
             </Menu.Item>
             <Menu.Item
                 name="profile"
+                className="corner"
                 active={tab === "profile"}
                 onClick={handleClick}
                 as={Link}
@@ -77,17 +78,6 @@ export default function NavMenu(): React.ReactElement {
                 <Icon name="user" />
                 {/* make this sign in as from api */}
                 Profile
-            </Menu.Item>
-            <Menu.Item
-                name="logout"
-                className="borderless corner"
-                active={tab === "logout"}
-                onClick={handleClick}
-                as={Link}
-                to="/login"
-                activeClassName="active">
-                <Icon name="sign out" />
-                Logout
             </Menu.Item>
         </Menu>
     )
