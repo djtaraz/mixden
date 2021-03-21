@@ -1,126 +1,69 @@
 import * as React from "react"
-import {
-    Accordion,
-    AccordionTitleProps,
-    Grid,
-    Icon,
-    Button,
-} from "semantic-ui-react"
+import { Grid, Icon, Button } from "semantic-ui-react"
+import { useQuery } from "@apollo/react-hooks"
+import gql from "graphql-tag"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Song from "../components/song"
+import Mix from "../components/mix"
 
+const FETCH_MIXES = gql`
+    query {
+        getMixes {
+            id
+            title
+            addedOn
+            username
+            songs {
+                id
+                title
+                link
+                username
+                addedOn
+            }
+        }
+    }
+`
 export default function IndexPage() {
-    const [activeIndex, setActiveIndex] = React.useState<string | number>(0)
-    const handleClick = (
-        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-        data: AccordionTitleProps
-    ) => {
-        const index = data.index
-        const active = activeIndex
-        const newIndex = active === index ? -1 : index
-        setActiveIndex(newIndex)
+    const { loading, data } = useQuery(FETCH_MIXES)
+    const [nextDisabled, setNextDisabled] = React.useState(false)
+    const [prevDisabled, setPrevDisabled] = React.useState(false)
+    const [selectedMix, setSelectedMix] = React.useState(0)
+
+    const nextMix = () => {
+        if (selectedMix === data.getMixes.length - 2) {
+            setSelectedMix(selectedMix + 1)
+            setNextDisabled(true)
+            setPrevDisabled(false)
+        } else {
+            setSelectedMix(selectedMix + 1)
+            setPrevDisabled(false)
+        }
+    }
+    const prevMix = () => {
+        if (selectedMix === 0) {
+            setPrevDisabled(true)
+            setNextDisabled(false)
+        } else if (selectedMix === 1) {
+            setSelectedMix(selectedMix - 1)
+            setPrevDisabled(true)
+            setNextDisabled(false)
+        } else {
+            setSelectedMix(selectedMix - 1)
+            setNextDisabled(false)
+        }
     }
 
-    const songs = [
-        {
-            id: 1,
-            title: "who dat girl",
-            addedOn: "21/03/2021",
-            playback: "lorem ipsum lorem one two three",
-        },
-        {
-            id: 2,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 3,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-        {
-            id: 4,
-            title: "timber",
-            addedOn: "21/03/2021",
-            playback: "lorem impsum lorem ipsum of course",
-        },
-    ]
+    React.useEffect(() => {
+        if (loading) {
+            setNextDisabled(true)
+            setPrevDisabled(true)
+        } else {
+            setNextDisabled(false)
+            setPrevDisabled(false)
+            console.log(data)
+        }
+    }, [data])
 
     return (
         <Layout>
@@ -135,7 +78,6 @@ export default function IndexPage() {
                     borderRadius: "0 2rem 0 0",
                 }}>
                 <Grid
-                    celled="internally"
                     divided={false}
                     style={{
                         //border: "2px dashed orange",
@@ -158,12 +100,19 @@ export default function IndexPage() {
                                 flexDirection: "column",
                                 justifyContent: "center",
                             }}>
-                            <Button icon>
+                            <Button
+                                icon
+                                onClick={prevMix}
+                                disabled={prevDisabled}>
                                 <Icon name="angle left" />
                             </Button>
                         </Grid.Column>
                         <Grid.Column textAlign="center" width={12}>
-                            <h1>Playlist title</h1>
+                            {loading ? (
+                                <h1>loading</h1>
+                            ) : (
+                                <h1>{data.getMixes[selectedMix].title}</h1>
+                            )}
                         </Grid.Column>
                         <Grid.Column
                             width={2}
@@ -173,7 +122,10 @@ export default function IndexPage() {
                                 flexDirection: "column",
                                 justifyContent: "center",
                             }}>
-                            <Button icon>
+                            <Button
+                                icon
+                                onClick={nextMix}
+                                disabled={nextDisabled}>
                                 <Icon name="angle right" />
                             </Button>
                         </Grid.Column>
@@ -194,18 +146,11 @@ export default function IndexPage() {
                                 maxHeight: "100%",
                                 overflow: "auto",
                             }}>
-                            <Accordion styled>
-                                {songs.map((song, index) => (
-                                    <Song
-                                        name={song.title}
-                                        addedOn={song.addedOn}
-                                        playback={song.playback}
-                                        index={index}
-                                        activeIndex={activeIndex}
-                                        handleClick={handleClick}
-                                    />
-                                ))}
-                            </Accordion>
+                            {loading ? (
+                                loading
+                            ) : (
+                                <Mix songs={data.getMixes[selectedMix].songs} />
+                            )}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -224,15 +169,3 @@ export default function IndexPage() {
         </Layout>
     )
 }
-
-/* image syntax gatsby 
-
-    import { StaticImage } from "gatsby-plugin-image"
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />*/

@@ -4,7 +4,7 @@ import { Accordion, AccordionTitleProps, Icon } from "semantic-ui-react"
 type Props = {
     name: string
     addedOn: string
-    playback: string //temp
+    link: string //temp
     index: number
     activeIndex: string | number
     handleClick: (
@@ -16,7 +16,7 @@ type Props = {
 export default function Song({
     name,
     addedOn,
-    playback,
+    link,
     index,
     activeIndex,
     handleClick,
@@ -31,7 +31,7 @@ export default function Song({
                 {name}, added on {addedOn}
             </Accordion.Title>
             <Accordion.Content active={activeIndex === index}>
-                <p>{playback}</p>
+                <p>{link}</p>
             </Accordion.Content>
         </>
     )

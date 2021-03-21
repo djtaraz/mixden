@@ -1,6 +1,5 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import { Grid } from "semantic-ui-react"
 
 import "../layout.css"
 import NavMenu from "./menu"
