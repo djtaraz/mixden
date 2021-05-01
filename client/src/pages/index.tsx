@@ -1,11 +1,12 @@
 import * as React from "react"
-import { Grid, Icon, Button } from "semantic-ui-react"
+import { Grid, Icon, Button, Divider } from "semantic-ui-react"
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Mix from "../components/mix"
+import BottomBar from "../components/bottombar"
 
 const FETCH_MIXES = gql`
     query {
@@ -66,16 +67,17 @@ export default function IndexPage() {
     }, [data])
 
     return (
-        <Layout>
+        <>
             <SEO title="Mixes" />
             <div
                 style={{
-                    height: "88.5%",
+                    height: "88.9%",
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "0 2rem 0 0",
+                    // border: "2px dashed blue",
                 }}>
                 <Grid
                     divided={false}
@@ -155,17 +157,22 @@ export default function IndexPage() {
                     </Grid.Row>
                 </Grid>
             </div>
+            <Divider fitted />
             <div
                 style={{
-                    height: "11.5%",
+                    height: "11%",
+                    marginTop: -2,
+                    marginLeft: -1,
                     display: "flex",
+                    background:
+                        "linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4)",
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "0 0 2rem 0",
                 }}>
-                menu
+                <BottomBar />
             </div>
-        </Layout>
+        </>
     )
 }

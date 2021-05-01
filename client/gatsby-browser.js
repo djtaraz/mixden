@@ -3,9 +3,12 @@ import ApolloClient from "apollo-client"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { createHttpLink } from "apollo-link-http"
 import { ApolloProvider } from "@apollo/react-hooks"
+import fetch from "isomorphic-fetch"
+import Layout from "./src/components/layout"
 
 const httpLink = createHttpLink({
     uri: "http://localhost:3000",
+    fetch,
 })
 
 // const authLink = setContext(() => {
@@ -24,4 +27,8 @@ const client = new ApolloClient({
 
 export const wrapRootElement = ({ element }) => {
     return <ApolloProvider client={client}>{element}</ApolloProvider>
+}
+
+export const wrapPageElement = ({ element, props }) => {
+    return <Layout {...props}>{element}</Layout>
 }
