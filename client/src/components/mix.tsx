@@ -13,20 +13,18 @@ type Props = {
             addedOn: string
         }
     ]
-}
-
-export default function Mix({ songs }: Props): React.ReactElement {
-    const [activeIndex, setActiveIndex] = React.useState<string | number>(0)
-    const handleClick = (
+    activeIndex: number
+    handleClick: (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
         data: AccordionTitleProps
-    ) => {
-        const index = data.index
-        const active = activeIndex
-        const newIndex = active === index ? -1 : index
-        setActiveIndex(newIndex)
-    }
+    ) => void
+}
 
+export default function Mix({
+    songs,
+    activeIndex,
+    handleClick,
+}: Props): React.ReactElement {
     return (
         <Accordion styled>
             {songs.map((song, index) => (

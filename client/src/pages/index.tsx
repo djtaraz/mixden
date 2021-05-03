@@ -1,12 +1,18 @@
 import * as React from "react"
-import { Grid, Icon, Button, Divider } from "semantic-ui-react"
+import {
+    Grid,
+    Icon,
+    Button,
+    Divider,
+    Accordion,
+    AccordionTitleProps,
+} from "semantic-ui-react"
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 
-import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Mix from "../components/mix"
-import BottomBar from "../components/bottombar"
+import Song from "../components/song"
 
 const FETCH_MIXES = gql`
     query {
@@ -30,28 +36,34 @@ export default function IndexPage() {
     const [nextDisabled, setNextDisabled] = React.useState(false)
     const [prevDisabled, setPrevDisabled] = React.useState(false)
     const [selectedMix, setSelectedMix] = React.useState(0)
+    const [activeIndex, setActiveIndex] = React.useState(0)
 
     const nextMix = () => {
         if (selectedMix === data.getMixes.length - 2) {
             setSelectedMix(selectedMix + 1)
+            setActiveIndex(-1)
             setNextDisabled(true)
             setPrevDisabled(false)
         } else {
             setSelectedMix(selectedMix + 1)
             setPrevDisabled(false)
+            setActiveIndex(-1)
         }
     }
     const prevMix = () => {
         if (selectedMix === 0) {
             setPrevDisabled(true)
             setNextDisabled(false)
+            setActiveIndex(-1)
         } else if (selectedMix === 1) {
             setSelectedMix(selectedMix - 1)
             setPrevDisabled(true)
             setNextDisabled(false)
+            setActiveIndex(-1)
         } else {
             setSelectedMix(selectedMix - 1)
             setNextDisabled(false)
+            setActiveIndex(-1)
         }
     }
 
@@ -66,23 +78,43 @@ export default function IndexPage() {
         }
     }, [data])
 
+    const handleClick = (
+        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        data: AccordionTitleProps
+    ) => {
+        const index = data.index
+        const newIndex = activeIndex === index ? -1 : index
+        const finalVal = Number(newIndex)
+        setActiveIndex(finalVal)
+    }
+
+    const nextSong = () => {
+        if (activeIndex !== data.getMixes[selectedMix].songs.length - 1) {
+            setActiveIndex(activeIndex + 1)
+        }
+    }
+
+    const prevSong = () => {
+        if (activeIndex !== 0) {
+            setActiveIndex(activeIndex - 1)
+        }
+    }
+
     return (
         <>
             <SEO title="Mixes" />
             <div
                 style={{
-                    height: "88.9%",
+                    height: "88.75%",
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "0 2rem 0 0",
-                    // border: "2px dashed blue",
                 }}>
                 <Grid
                     divided={false}
                     style={{
-                        //border: "2px dashed orange",
                         borderRadius: "0 2rem 0 0",
                         maxWidth: "100%",
                         height: "100%",
@@ -151,7 +183,11 @@ export default function IndexPage() {
                             {loading ? (
                                 loading
                             ) : (
-                                <Mix songs={data.getMixes[selectedMix].songs} />
+                                <Mix
+                                    songs={data.getMixes[selectedMix].songs}
+                                    activeIndex={activeIndex}
+                                    handleClick={handleClick}
+                                />
                             )}
                         </Grid.Column>
                     </Grid.Row>
@@ -171,7 +207,24 @@ export default function IndexPage() {
                     alignItems: "center",
                     borderRadius: "0 0 2rem 0",
                 }}>
-                <BottomBar />
+                <div
+                    style={{
+                        width: "30%",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                    }}>
+                    <Button icon onClick={prevSong}>
+                        <Icon name="backward" size="big" />
+                    </Button>
+                    <Button icon>
+                        <Icon name="play" size="big" />
+                    </Button>
+                    <Button icon onClick={nextSong}>
+                        <Icon name="forward" size="big" />
+                    </Button>
+                </div>
             </div>
         </>
     )
